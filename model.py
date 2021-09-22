@@ -10,9 +10,12 @@ session = tf.compat.v1.Session(config=config)
 set_session(session)
 
 
-class WildfireModel(object):
+class FacialExpressionModel(object):
 
-    SMOKE_LIST = ["Smoke","No smoke"]
+    EMOTIONS_LIST = ["Angry", "Disgust",
+                     "Fear", "Happy",
+                     "Neutral", "Sad",
+                     "Surprise"]
 
     def __init__(self, model_json_file, model_weights_file):
         # load model from JSON file
@@ -29,4 +32,4 @@ class WildfireModel(object):
         global session
         set_session(session)
         self.preds = self.loaded_model.predict(img)
-        return WildfireModel.SMOKE_LIST[np.argmax(self.preds)]
+        return FacialExpressionModel.EMOTIONS_LIST[np.argmax(self.preds)]
